@@ -3,6 +3,8 @@ package ro.fasttrackit.tema12.course.service.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ro.fasttrackit.tema12.course.service.controller.exceptions.EntityNotFoundException;
+import ro.fasttrackit.tema12.course.service.model.request.CourseRequestDto;
+import ro.fasttrackit.tema12.course.service.model.response.CourseResponseDto;
 import ro.fasttrackit.tema12.course.service.service.CourseService;
 import ro.fasttrackit.tema12.course.service.model.entity.Course;
 
@@ -16,18 +18,17 @@ public class CourseController {
     private final CourseService courseService;
 
     @GetMapping
-    List<Course> getAll() {
+    List<CourseResponseDto> getAll() {
         return courseService.getAll();
     }
 
     @PostMapping
-    Course addCourse(@RequestBody Course course) {
+    CourseResponseDto addCourse(@RequestBody CourseRequestDto course) {
         return courseService.addCourse(course);
     }
 
     @GetMapping("{courseId}")
-    Course getCourseById(@PathVariable String courseId) {
-        return courseService.getCourseById(courseId)
-                .orElseThrow(() -> new EntityNotFoundException("Course with id " + courseId + " not Found"));
+    CourseResponseDto getCourseById(@PathVariable String courseId) {
+        return courseService.getCourseById(courseId);
     }
 }

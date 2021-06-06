@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentEvent {
+public class StudentDeleteEvent {
     private String studentId;
 }
 

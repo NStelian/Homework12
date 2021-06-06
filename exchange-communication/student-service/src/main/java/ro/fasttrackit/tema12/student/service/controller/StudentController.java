@@ -2,9 +2,9 @@ package ro.fasttrackit.tema12.student.service.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ro.fasttrackit.tema12.student.service.controller.exceptions.EntityNotFoundException;
 import ro.fasttrackit.tema12.student.service.model.StudentFilters;
-import ro.fasttrackit.tema12.student.service.model.entity.Student;
+import ro.fasttrackit.tema12.student.service.model.request.StudentRequestDto;
+import ro.fasttrackit.tema12.student.service.model.response.StudentResponseDto;
 import ro.fasttrackit.tema12.student.service.service.StudentService;
 
 import java.util.List;
@@ -16,19 +16,18 @@ public class StudentController {
     private final StudentService studentService;
 
     @GetMapping
-    List<Student> getAll(StudentFilters filters) {
+    List<StudentResponseDto> getAll(StudentFilters filters) {
         return studentService.getAllByFilters(filters);
     }
 
     @PostMapping
-    Student addStudent(@RequestBody Student student) {
+    StudentResponseDto addStudent(@RequestBody StudentRequestDto student) {
         return studentService.addStudent(student);
     }
 
     @GetMapping("{studentId}")
-    Student getStudentById(@PathVariable String studentId) {
-        return studentService.getStudentById(studentId)
-                .orElseThrow(() -> new EntityNotFoundException("Student with id " + studentId + " not Found"));
+    StudentResponseDto getStudentById(@PathVariable String studentId) {
+        return studentService.getStudentById(studentId);
     }
 
     @DeleteMapping("{studentId}")

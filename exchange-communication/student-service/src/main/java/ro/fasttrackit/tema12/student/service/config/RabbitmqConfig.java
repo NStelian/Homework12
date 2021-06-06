@@ -7,17 +7,14 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
+@ComponentScan(basePackages = {"ro.fasttrackit.tema12.model.config"})
 public class RabbitmqConfig {
     private final ConnectionFactory connectionFactory;
-
-    @Bean
-    FanoutExchange fanoutExchange() {
-        return new FanoutExchange("fasttrackit.fanout");
-    }
 
     @Bean
     RabbitTemplate rabbitTemplate() {
